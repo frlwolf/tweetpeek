@@ -12,5 +12,6 @@
 
 @property (nonatomic, strong) UIImageView *magnifierView;
 @property (nonatomic, strong) UITextField *textField;
+@property (nonatomic, copy) void(^didBeginEditingBlock)();
 
 @end

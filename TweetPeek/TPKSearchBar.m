@@ -58,21 +58,29 @@
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[textField]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[magnifierView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-0@900-[magnifierView(==74)]-0@900-[textField(==259)]-0@900-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
-    
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:magnifierView attribute:NSLayoutAttributeLeftMargin relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.f constant:-180.f]];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:textField attribute:NSLayoutAttributeRightMargin relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.f constant:180.f]];
+
+	self.textFieldWidthConstraint = [NSLayoutConstraint constraintWithItem:textField attribute:NSLayoutAttributeLeftMargin relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.f constant:-180.f];
+	self.magnifierWidthConstraint = [NSLayoutConstraint constraintWithItem:magnifierView attribute:NSLayoutAttributeRightMargin relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.f constant:180.f];
+
+    [self addConstraint:self.textFieldWidthConstraint];
+    [self addConstraint:self.magnifierWidthConstraint];
 }
 
 - (void)didBeginEditing:(UITextField *)textField
 {
     textField.text = nil;
-    
-    
+
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		[self transitToFullSearch];
+		if (self.didBeginEditingBlock)
+			self.didBeginEditingBlock();
+	});
 }
 
 - (void)transitToFullSearch
 {
-    
+	self.textFieldWidthConstraint.constant = ;
+	self.magnifierWidthConstraint.constant = 40.f - floorf(self.view.frame.size.width / 2.f)
 }
 
 @end
