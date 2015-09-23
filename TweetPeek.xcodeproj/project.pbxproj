@@ -13,6 +13,19 @@
 		278EB9A31BB1E3B600EE3A65 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 278EB9A11BB1E3B600EE3A65 /* LaunchScreen.xib */; };
 		278EB9AF1BB1E3B700EE3A65 /* TweetPeekTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 278EB9AE1BB1E3B700EE3A65 /* TweetPeekTests.m */; };
 		278EB9BA1BB1EBCC00EE3A65 /* TPKSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 278EB9B91BB1EBCC00EE3A65 /* TPKSearchViewController.m */; };
+		27F733421BB2055E005A9EC1 /* TPKResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F733411BB2055E005A9EC1 /* TPKResultsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		27F733451BB2075A005A9EC1 /* TPKRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F733441BB20759005A9EC1 /* TPKRootViewController.m */; settings = {ASSET_TAGS = (); }; };
+		27F733481BB20F8E005A9EC1 /* TPKTweetCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F733471BB20F8E005A9EC1 /* TPKTweetCollectionViewController.m */; settings = {ASSET_TAGS = (); }; };
+		27F7334B1BB21756005A9EC1 /* TPKSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F7334A1BB21756005A9EC1 /* TPKSearchBar.m */; settings = {ASSET_TAGS = (); }; };
+		27F733541BB217FB005A9EC1 /* botao_generico_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 27F7334C1BB217FB005A9EC1 /* botao_generico_off.png */; settings = {ASSET_TAGS = (); }; };
+		27F733551BB217FB005A9EC1 /* botao_generico_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27F7334D1BB217FB005A9EC1 /* botao_generico_off@2x.png */; settings = {ASSET_TAGS = (); }; };
+		27F733561BB217FB005A9EC1 /* botao_generico_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 27F7334E1BB217FB005A9EC1 /* botao_generico_on.png */; settings = {ASSET_TAGS = (); }; };
+		27F733571BB217FB005A9EC1 /* botao_generico_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27F7334F1BB217FB005A9EC1 /* botao_generico_on@2x.png */; settings = {ASSET_TAGS = (); }; };
+		27F733581BB217FB005A9EC1 /* Icon_search_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 27F733501BB217FB005A9EC1 /* Icon_search_big.png */; settings = {ASSET_TAGS = (); }; };
+		27F733591BB217FB005A9EC1 /* Icon_search_big@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27F733511BB217FB005A9EC1 /* Icon_search_big@2x.png */; settings = {ASSET_TAGS = (); }; };
+		27F7335A1BB217FB005A9EC1 /* Twitter_logo_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 27F733521BB217FB005A9EC1 /* Twitter_logo_blue.png */; settings = {ASSET_TAGS = (); }; };
+		27F7335B1BB217FB005A9EC1 /* Twitter_logo_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27F733531BB217FB005A9EC1 /* Twitter_logo_blue@2x.png */; settings = {ASSET_TAGS = (); }; };
+		27F7335E1BB21861005A9EC1 /* UIColor+TPK.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F7335D1BB21861005A9EC1 /* UIColor+TPK.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +51,24 @@
 		278EB9AE1BB1E3B700EE3A65 /* TweetPeekTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TweetPeekTests.m; sourceTree = "<group>"; };
 		278EB9B81BB1EBCC00EE3A65 /* TPKSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKSearchViewController.h; sourceTree = "<group>"; };
 		278EB9B91BB1EBCC00EE3A65 /* TPKSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKSearchViewController.m; sourceTree = "<group>"; };
+		27F733401BB2055E005A9EC1 /* TPKResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKResultsViewController.h; sourceTree = "<group>"; };
+		27F733411BB2055E005A9EC1 /* TPKResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKResultsViewController.m; sourceTree = "<group>"; };
+		27F733431BB20759005A9EC1 /* TPKRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKRootViewController.h; sourceTree = "<group>"; };
+		27F733441BB20759005A9EC1 /* TPKRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKRootViewController.m; sourceTree = "<group>"; };
+		27F733461BB20F8E005A9EC1 /* TPKTweetCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKTweetCollectionViewController.h; sourceTree = "<group>"; };
+		27F733471BB20F8E005A9EC1 /* TPKTweetCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKTweetCollectionViewController.m; sourceTree = "<group>"; };
+		27F733491BB21756005A9EC1 /* TPKSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKSearchBar.h; sourceTree = "<group>"; };
+		27F7334A1BB21756005A9EC1 /* TPKSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKSearchBar.m; sourceTree = "<group>"; };
+		27F7334C1BB217FB005A9EC1 /* botao_generico_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botao_generico_off.png; sourceTree = "<group>"; };
+		27F7334D1BB217FB005A9EC1 /* botao_generico_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "botao_generico_off@2x.png"; sourceTree = "<group>"; };
+		27F7334E1BB217FB005A9EC1 /* botao_generico_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botao_generico_on.png; sourceTree = "<group>"; };
+		27F7334F1BB217FB005A9EC1 /* botao_generico_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "botao_generico_on@2x.png"; sourceTree = "<group>"; };
+		27F733501BB217FB005A9EC1 /* Icon_search_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_search_big.png; sourceTree = "<group>"; };
+		27F733511BB217FB005A9EC1 /* Icon_search_big@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon_search_big@2x.png"; sourceTree = "<group>"; };
+		27F733521BB217FB005A9EC1 /* Twitter_logo_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Twitter_logo_blue.png; sourceTree = "<group>"; };
+		27F733531BB217FB005A9EC1 /* Twitter_logo_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Twitter_logo_blue@2x.png"; sourceTree = "<group>"; };
+		27F7335C1BB21861005A9EC1 /* UIColor+TPK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+TPK.h"; sourceTree = "<group>"; };
+		27F7335D1BB21861005A9EC1 /* UIColor+TPK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+TPK.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,8 +112,18 @@
 			children = (
 				278EB9961BB1E3B600EE3A65 /* TPKAppDelegate.h */,
 				278EB9971BB1E3B600EE3A65 /* TPKAppDelegate.m */,
+				27F733431BB20759005A9EC1 /* TPKRootViewController.h */,
+				27F733441BB20759005A9EC1 /* TPKRootViewController.m */,
 				278EB9B81BB1EBCC00EE3A65 /* TPKSearchViewController.h */,
 				278EB9B91BB1EBCC00EE3A65 /* TPKSearchViewController.m */,
+				27F733401BB2055E005A9EC1 /* TPKResultsViewController.h */,
+				27F733411BB2055E005A9EC1 /* TPKResultsViewController.m */,
+				27F733461BB20F8E005A9EC1 /* TPKTweetCollectionViewController.h */,
+				27F733471BB20F8E005A9EC1 /* TPKTweetCollectionViewController.m */,
+				27F733491BB21756005A9EC1 /* TPKSearchBar.h */,
+				27F7334A1BB21756005A9EC1 /* TPKSearchBar.m */,
+				27F7335C1BB21861005A9EC1 /* UIColor+TPK.h */,
+				27F7335D1BB21861005A9EC1 /* UIColor+TPK.m */,
 				278EB99F1BB1E3B600EE3A65 /* Images.xcassets */,
 				278EB9A11BB1E3B600EE3A65 /* LaunchScreen.xib */,
 				278EB9921BB1E3B600EE3A65 /* Supporting Files */,
@@ -93,6 +134,14 @@
 		278EB9921BB1E3B600EE3A65 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				27F7334C1BB217FB005A9EC1 /* botao_generico_off.png */,
+				27F7334D1BB217FB005A9EC1 /* botao_generico_off@2x.png */,
+				27F7334E1BB217FB005A9EC1 /* botao_generico_on.png */,
+				27F7334F1BB217FB005A9EC1 /* botao_generico_on@2x.png */,
+				27F733501BB217FB005A9EC1 /* Icon_search_big.png */,
+				27F733511BB217FB005A9EC1 /* Icon_search_big@2x.png */,
+				27F733521BB217FB005A9EC1 /* Twitter_logo_blue.png */,
+				27F733531BB217FB005A9EC1 /* Twitter_logo_blue@2x.png */,
 				278EB9931BB1E3B600EE3A65 /* Info.plist */,
 				278EB9941BB1E3B600EE3A65 /* main.m */,
 			);
@@ -196,8 +245,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27F733551BB217FB005A9EC1 /* botao_generico_off@2x.png in Resources */,
 				278EB9A31BB1E3B600EE3A65 /* LaunchScreen.xib in Resources */,
+				27F733591BB217FB005A9EC1 /* Icon_search_big@2x.png in Resources */,
+				27F733561BB217FB005A9EC1 /* botao_generico_on.png in Resources */,
+				27F733581BB217FB005A9EC1 /* Icon_search_big.png in Resources */,
+				27F733541BB217FB005A9EC1 /* botao_generico_off.png in Resources */,
 				278EB9A01BB1E3B600EE3A65 /* Images.xcassets in Resources */,
+				27F7335B1BB217FB005A9EC1 /* Twitter_logo_blue@2x.png in Resources */,
+				27F733571BB217FB005A9EC1 /* botao_generico_on@2x.png in Resources */,
+				27F7335A1BB217FB005A9EC1 /* Twitter_logo_blue.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,8 +273,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				278EB9BA1BB1EBCC00EE3A65 /* TPKSearchViewController.m in Sources */,
+				27F733421BB2055E005A9EC1 /* TPKResultsViewController.m in Sources */,
 				278EB9981BB1E3B600EE3A65 /* TPKAppDelegate.m in Sources */,
 				278EB9951BB1E3B600EE3A65 /* main.m in Sources */,
+				27F733481BB20F8E005A9EC1 /* TPKTweetCollectionViewController.m in Sources */,
+				27F733451BB2075A005A9EC1 /* TPKRootViewController.m in Sources */,
+				27F7334B1BB21756005A9EC1 /* TPKSearchBar.m in Sources */,
+				27F7335E1BB21861005A9EC1 /* UIColor+TPK.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,6 +468,7 @@
 				278EB9B41BB1E3B700EE3A65 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		278EB9B51BB1E3B700EE3A65 /* Build configuration list for PBXNativeTarget "TweetPeekTests" */ = {
 			isa = XCConfigurationList;
@@ -414,6 +477,7 @@
 				278EB9B71BB1E3B700EE3A65 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

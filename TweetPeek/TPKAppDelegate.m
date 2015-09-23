@@ -7,6 +7,7 @@
 //
 
 #import "TPKAppDelegate.h"
+#import "TPKRootViewController.h"
 
 @interface TPKAppDelegate ()
 
@@ -14,13 +15,17 @@
 
 @implementation TPKAppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-	self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    UIWindow *window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
 
-	
+    TPKRootViewController *rootViewController = [[TPKRootViewController alloc] init];
+    
+    window.rootViewController = rootViewController;
+    [window makeKeyAndVisible];
 
+    self.window = window;
+    
 	return YES;
 }
 
