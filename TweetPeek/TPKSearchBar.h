@@ -8,10 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TPKSearchBar : UIView
+@interface TPKSearchBar : UIControl
 
-@property (nonatomic, strong) UIImageView *magnifierView;
-@property (nonatomic, strong) UITextField *textField;
 @property (nonatomic, copy) void(^didBeginEditingBlock)();
+@property (nonatomic, copy) void(^editingDidChangedBlock)(NSString *);
 
 @end

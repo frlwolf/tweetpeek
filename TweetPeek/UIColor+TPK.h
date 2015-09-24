@@ -13,5 +13,6 @@
 @interface UIColor (TPK)
 
 + (UIColor *)tpk_backgroundColor;
++ (UIColor *)tpk_blueColor;
 
 @end

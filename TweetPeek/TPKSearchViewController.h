@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class TPKSearchBar;
+
 @interface TPKSearchViewController : UIViewController
+
+@property (nonatomic, weak) TPKSearchBar *searchBar;
 
 @end

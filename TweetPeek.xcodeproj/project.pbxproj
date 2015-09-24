@@ -13,6 +13,7 @@
 		278EB9A31BB1E3B600EE3A65 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 278EB9A11BB1E3B600EE3A65 /* LaunchScreen.xib */; };
 		278EB9AF1BB1E3B700EE3A65 /* TweetPeekTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 278EB9AE1BB1E3B700EE3A65 /* TweetPeekTests.m */; };
 		278EB9BA1BB1EBCC00EE3A65 /* TPKSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 278EB9B91BB1EBCC00EE3A65 /* TPKSearchViewController.m */; };
+		27E1CDF91BB3880F00906E9A /* UIImage+TPK.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E1CDF81BB3880F00906E9A /* UIImage+TPK.m */; settings = {ASSET_TAGS = (); }; };
 		27F733421BB2055E005A9EC1 /* TPKResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F733411BB2055E005A9EC1 /* TPKResultsViewController.m */; settings = {ASSET_TAGS = (); }; };
 		27F733451BB2075A005A9EC1 /* TPKRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F733441BB20759005A9EC1 /* TPKRootViewController.m */; settings = {ASSET_TAGS = (); }; };
 		27F733481BB20F8E005A9EC1 /* TPKTweetCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F733471BB20F8E005A9EC1 /* TPKTweetCollectionViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -51,6 +52,8 @@
 		278EB9AE1BB1E3B700EE3A65 /* TweetPeekTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TweetPeekTests.m; sourceTree = "<group>"; };
 		278EB9B81BB1EBCC00EE3A65 /* TPKSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKSearchViewController.h; sourceTree = "<group>"; };
 		278EB9B91BB1EBCC00EE3A65 /* TPKSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKSearchViewController.m; sourceTree = "<group>"; };
+		27E1CDF71BB3880F00906E9A /* UIImage+TPK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+TPK.h"; sourceTree = "<group>"; };
+		27E1CDF81BB3880F00906E9A /* UIImage+TPK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+TPK.m"; sourceTree = "<group>"; };
 		27F733401BB2055E005A9EC1 /* TPKResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKResultsViewController.h; sourceTree = "<group>"; };
 		27F733411BB2055E005A9EC1 /* TPKResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKResultsViewController.m; sourceTree = "<group>"; };
 		27F733431BB20759005A9EC1 /* TPKRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKRootViewController.h; sourceTree = "<group>"; };
@@ -124,6 +127,8 @@
 				27F7334A1BB21756005A9EC1 /* TPKSearchBar.m */,
 				27F7335C1BB21861005A9EC1 /* UIColor+TPK.h */,
 				27F7335D1BB21861005A9EC1 /* UIColor+TPK.m */,
+				27E1CDF71BB3880F00906E9A /* UIImage+TPK.h */,
+				27E1CDF81BB3880F00906E9A /* UIImage+TPK.m */,
 				278EB99F1BB1E3B600EE3A65 /* Images.xcassets */,
 				278EB9A11BB1E3B600EE3A65 /* LaunchScreen.xib */,
 				278EB9921BB1E3B600EE3A65 /* Supporting Files */,
@@ -278,6 +283,7 @@
 				278EB9951BB1E3B600EE3A65 /* main.m in Sources */,
 				27F733481BB20F8E005A9EC1 /* TPKTweetCollectionViewController.m in Sources */,
 				27F733451BB2075A005A9EC1 /* TPKRootViewController.m in Sources */,
+				27E1CDF91BB3880F00906E9A /* UIImage+TPK.m in Sources */,
 				27F7334B1BB21756005A9EC1 /* TPKSearchBar.m in Sources */,
 				27F7335E1BB21861005A9EC1 /* UIColor+TPK.m in Sources */,
 			);

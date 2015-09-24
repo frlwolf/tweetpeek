@@ -15,4 +15,9 @@
     return [UIColor colorWithWhite:0.96 alpha:1.0];
 }
 
++ (UIColor *)tpk_blueColor
+{
+    return UIColorWithRGB(94, 159, 202);
+}
+
 @end
