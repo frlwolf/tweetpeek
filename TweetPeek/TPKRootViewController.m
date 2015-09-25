@@ -9,6 +9,7 @@
 #import "TPKRootViewController.h"
 #import "TPKSearchViewController.h"
 #import "TPKResultsViewController.h"
+#import "TPKTwitterService.h"
 #import "TPKSearchBar.h"
 #import "UIColor+TPK.h"
 
@@ -24,14 +25,24 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+
+	TPKTwitterService *twitterService = [[TPKTwitterService alloc] init];
+	[twitterService requestTweetsWithQuery:@"brasil" success:^(NSArray *tweets) {
+		//
+	} failure:^(NSString *description, NSError *error) {
+		//
+	}];
     
     TPKSearchBar *searchBar = [[TPKSearchBar alloc] init];
     searchBar.backgroundColor = [UIColor whiteColor];
     searchBar.translatesAutoresizingMaskIntoConstraints = NO;
     searchBar.didBeginEditingBlock = ^(){
-        [self showResultsController];
+		// TO-DO
     };
-    
+	searchBar.editingDidChangedBlock = ^(NSString *text){
+		// TO-DO
+	};
+
     self.searchBar = searchBar;
     
     self.view.backgroundColor = [UIColor tpk_backgroundColor];

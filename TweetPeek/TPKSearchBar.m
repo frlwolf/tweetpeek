@@ -42,9 +42,9 @@
     magnifierView.contentMode = UIViewContentModeScaleAspectFit;
     magnifierView.translatesAutoresizingMaskIntoConstraints = NO;
     magnifierView.userInteractionEnabled = NO;
-    magnifierView.layer.borderColor = [UIColor redColor].CGColor;
-    magnifierView.layer.borderWidth = 1.f;
-    
+//    magnifierView.layer.borderColor = [UIColor redColor].CGColor;
+//    magnifierView.layer.borderWidth = 1.f;
+
     [self addSubview:magnifierView];
     
     self.magnifierView = magnifierView;
@@ -146,32 +146,31 @@
                                                                 multiplier:1.f constant:36.f];
     
     [self addConstraint:self.magnifierWidthConstraint];
-    
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        if (self.didBeginEditingBlock)
-            self.didBeginEditingBlock();
-        
-        [UIView animateWithDuration:.4f delay:.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
-            
-            [self layoutIfNeeded];
-            
-            self.backgroundColor = [UIColor tpk_blueColor];
-            
-        } completion:^(BOOL finished) {
 
-            self.textField.textColor = [UIColor whiteColor];
-            self.textField.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:27];
-            
-            self.magnifierView.image = [[UIImage imageNamed:@"Icon_search_big.png"] tpk_imageByColorizingWithColor:[UIColor whiteColor]];
-            
-        }];
-//    });
+	if (self.didBeginEditingBlock)
+		self.didBeginEditingBlock();
 }
 
 - (void)editingDidChanged:(UITextField *)textField
 {
     if (self.editingDidChangedBlock)
         self.editingDidChangedBlock(textField.text);
+}
+
+- (void)transitToBlueStyle:(BOOL)animated
+{
+	[UIView animateWithDuration:animated ? .4f : .0f delay:.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
+
+		[self layoutIfNeeded];
+
+		self.backgroundColor = [UIColor tpk_blueColor];
+
+		self.textField.textColor = [UIColor whiteColor];
+		self.textField.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:27];
+
+		self.magnifierView.image = [[UIImage imageNamed:@"Icon_search_big.png"] tpk_imageByColorizingWithColor:[UIColor whiteColor]];
+
+	} completion:nil];
 }
 
 @end
