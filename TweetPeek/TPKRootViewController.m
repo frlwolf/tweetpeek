@@ -25,23 +25,29 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-
-	TPKTwitterService *twitterService = [[TPKTwitterService alloc] init];
-	[twitterService requestTweetsWithQuery:@"brasil" success:^(NSArray *tweets) {
-		//
-	} failure:^(NSString *description, NSError *error) {
-		//
-	}];
     
     TPKSearchBar *searchBar = [[TPKSearchBar alloc] init];
     searchBar.backgroundColor = [UIColor whiteColor];
     searchBar.translatesAutoresizingMaskIntoConstraints = NO;
-    searchBar.didBeginEditingBlock = ^(){
-		// TO-DO
+    searchBar.requestToSearchBlock = ^(NSString *text){
+        void(^searchBlock)() = ^{
+            [[TPKTwitterService sharedService] requestTweetsWithQuery:text success:^(NSArray *tweets) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.resultsViewController.tweets = tweets;
+                });
+            } failure:^(NSString *description, NSError *error) {
+                //
+            }];
+        };
+        
+        if (self.resultsViewController == nil)
+        {
+            [self.searchBar transitToBlueStyle:YES];
+            [self showResultsController:searchBlock];
+        }
+        else
+            searchBlock();
     };
-	searchBar.editingDidChangedBlock = ^(NSString *text){
-		// TO-DO
-	};
 
     self.searchBar = searchBar;
     
@@ -59,7 +65,7 @@
     [self.view addSubview:searchViewController.view];
 }
 
-- (void)showResultsController
+- (void)showResultsController:(void(^)())completion
 {
     TPKResultsViewController *resultsViewController = [[TPKResultsViewController alloc] init];
     resultsViewController.view.frame = self.view.bounds;
@@ -77,10 +83,10 @@
         
         self.searchViewController.view.alpha = .0f;
         
-    } completion:^(BOOL finished) {
-        
         resultsViewController.searchBar = self.searchBar;
         
+    } completion:^(BOOL finished) {
+        completion();
     }];
 }
 

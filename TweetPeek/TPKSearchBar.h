@@ -10,7 +10,8 @@
 
 @interface TPKSearchBar : UIControl
 
-@property (nonatomic, copy) void(^didBeginEditingBlock)();
-@property (nonatomic, copy) void(^editingDidChangedBlock)(NSString *);
+@property (nonatomic, strong) void(^requestToSearchBlock)(NSString *);
+
+- (void)transitToBlueStyle:(BOOL)animated;
 
 @end

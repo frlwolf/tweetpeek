@@ -19,6 +19,8 @@
 @property (nonatomic, strong) NSString *encodedAppToken;
 @property (nonatomic, strong) NSString *bearerToken;
 
+@property (nonatomic, strong) NSMutableDictionary *downloadTasks;
+
 @end
 
 @implementation TPKTwitterService
@@ -45,6 +47,8 @@
 		self.twitterSession = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:nil delegateQueue:nil];
 		self.twitterAPIEndPoint = [NSURL URLWithString:@"https://api.twitter.com"];
 		self.encodedAppToken = @"ZW5LT2FLdDE3VXh0TDV5VXlVZWFsSW91eTpHdzdoak1oWHc3ZmJ3YnpVSTZzMXplUXlYTmRxTU5GNTUyTHVYVU83cmhQdWg2WTIycA==";
+        
+        self.downloadTasks = [[NSMutableDictionary alloc] init];
 	}
 
 	return self;
@@ -75,7 +79,7 @@
 - (void)requestTweetsWithQuery:(NSString *)query success:(void(^)(NSArray *))success failure:(void(^)(NSString *, NSError *))failure
 {
 	void (^requestBlock)() = ^{
-		NSURL *requestURL = [NSURL URLWithString:[NSString stringWithFormat:@"/1.1/search/tweets.json?q=%@", [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] relativeToURL:self.twitterAPIEndPoint];
+		NSURL *requestURL = [NSURL URLWithString:[NSString stringWithFormat:@"/1.1/search/tweets.json?q=%@;&count=50", [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] relativeToURL:self.twitterAPIEndPoint];
 		NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:requestURL];
 		[request addValue:[NSString stringWithFormat:@"Bearer %@", self.bearerToken] forHTTPHeaderField:@"Authorization€"];
 		[request setHTTPMethod:@"GET"];
@@ -112,6 +116,47 @@
 			self.bearerToken = token;
 			requestBlock();
 		} failure:failure];
+}
+
+- (void)loadImageWithURL:(NSURL *)URL completion:(void (^)(UIImage *))completion
+{
+    NSURLSessionDownloadTask *task = [self.twitterSession downloadTaskWithURL:URL completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        NSData *data = [[NSData alloc] initWithContentsOfFile:[location path]];
+        UIImage *image = [UIImage imageWithData:data];
+        
+        CGFloat dimension = image.size.width > image.size.height ? image.size.width : image.size.height;
+        CGRect bounds = CGRectMake(.5, .5, dimension, dimension);
+        
+        UIGraphicsBeginImageContextWithOptions(bounds.size, NO, [UIScreen mainScreen].scale);
+        CGContextSetAllowsAntialiasing(UIGraphicsGetCurrentContext(), YES);
+        
+        UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:bounds cornerRadius:floorf(bounds.size.height / 2.f)];
+        [bezierPath addClip];
+        
+        [image drawInRect:bounds];
+        
+        UIImage *finalImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(finalImage);
+        });
+        
+    }];
+    
+    [task resume];
+    
+    self.downloadTasks[URL] = task;
+}
+
+- (void)cancelDownloadTaskForURL:(NSURL *)URL
+{
+    NSURLSessionDownloadTask *task = self.downloadTasks[URL];
+    
+    [self.downloadTasks removeObjectForKey:URL];
+    
+    [task cancel];
 }
 
 @end

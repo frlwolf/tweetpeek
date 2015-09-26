@@ -11,9 +11,12 @@
 
 @implementation TPKTweet
 
-+ (instancetype)tweetWithSerializedDictonary:(NSDictionary *)dictionary
++ (instancetype)tweetWithSerializedStatus:(NSDictionary *)dictionary;
 {
 	TPKTweet *tweet = [[self alloc] init];
+    tweet.id = dictionary[@"id_str"];
+    tweet.text = dictionary[@"text"];
+    tweet.sender = [TPKTwitterUser userWithSerializedUser:dictionary[@"user"]];
 
 	return tweet;
 }

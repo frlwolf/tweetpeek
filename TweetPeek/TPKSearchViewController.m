@@ -44,6 +44,11 @@
     [self.view addSubview:extraContainer];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleDefault;
+}
+
 - (void)setSearchBar:(TPKSearchBar *)searchBar
 {
     _searchBar = searchBar;

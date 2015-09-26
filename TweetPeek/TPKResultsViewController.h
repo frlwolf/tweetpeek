@@ -11,6 +11,7 @@
 @class TPKSearchBar;
 @interface TPKResultsViewController : UIViewController
 
+@property (nonatomic, strong) NSArray *tweets;
 @property (nonatomic, weak) TPKSearchBar *searchBar;
 
 @end

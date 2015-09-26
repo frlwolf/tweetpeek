@@ -7,8 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIImage.h>
 
 @interface TPKTwitterUser : NSObject
+
+@property (nonatomic, strong) NSString *id;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *screenName;
+@property (nonatomic, strong) UIImage *profileImage;
+@property (nonatomic, strong) NSURL *profileImageURL;
 
 + (instancetype)userWithSerializedUser:(NSDictionary *)dictionary;
 
