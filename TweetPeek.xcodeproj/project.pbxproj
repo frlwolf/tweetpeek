@@ -17,6 +17,7 @@
 		278EB9A31BB1E3B600EE3A65 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 278EB9A11BB1E3B600EE3A65 /* LaunchScreen.xib */; };
 		278EB9AF1BB1E3B700EE3A65 /* TweetPeekTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 278EB9AE1BB1E3B700EE3A65 /* TweetPeekTests.m */; };
 		278EB9BA1BB1EBCC00EE3A65 /* TPKSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 278EB9B91BB1EBCC00EE3A65 /* TPKSearchViewController.m */; };
+		27A035CC1BB7AD3F00200939 /* TPKTopicsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A035CB1BB7AD3F00200939 /* TPKTopicsViewController.m */; settings = {ASSET_TAGS = (); }; };
 		27F733421BB2055E005A9EC1 /* TPKResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F733411BB2055E005A9EC1 /* TPKResultsViewController.m */; };
 		27F733451BB2075A005A9EC1 /* TPKRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F733441BB20759005A9EC1 /* TPKRootViewController.m */; };
 		27F7334B1BB21756005A9EC1 /* TPKSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F7334A1BB21756005A9EC1 /* TPKSearchBar.m */; };
@@ -62,6 +63,8 @@
 		278EB9AE1BB1E3B700EE3A65 /* TweetPeekTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TweetPeekTests.m; sourceTree = "<group>"; };
 		278EB9B81BB1EBCC00EE3A65 /* TPKSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKSearchViewController.h; sourceTree = "<group>"; };
 		278EB9B91BB1EBCC00EE3A65 /* TPKSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKSearchViewController.m; sourceTree = "<group>"; };
+		27A035CA1BB7AD3F00200939 /* TPKTopicsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKTopicsViewController.h; sourceTree = "<group>"; };
+		27A035CB1BB7AD3F00200939 /* TPKTopicsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKTopicsViewController.m; sourceTree = "<group>"; };
 		27F733401BB2055E005A9EC1 /* TPKResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKResultsViewController.h; sourceTree = "<group>"; };
 		27F733411BB2055E005A9EC1 /* TPKResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKResultsViewController.m; sourceTree = "<group>"; };
 		27F733431BB20759005A9EC1 /* TPKRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKRootViewController.h; sourceTree = "<group>"; };
@@ -198,6 +201,8 @@
 				278EB9B91BB1EBCC00EE3A65 /* TPKSearchViewController.m */,
 				27F733401BB2055E005A9EC1 /* TPKResultsViewController.h */,
 				27F733411BB2055E005A9EC1 /* TPKResultsViewController.m */,
+				27A035CA1BB7AD3F00200939 /* TPKTopicsViewController.h */,
+				27A035CB1BB7AD3F00200939 /* TPKTopicsViewController.m */,
 			);
 			name = "View Controller";
 			sourceTree = "<group>";
@@ -332,6 +337,7 @@
 				276D4AFB1BB4510B00022D22 /* TPKTwitterService.m in Sources */,
 				2707186C1BB60731000F9EFB /* TPKTweetCell.m in Sources */,
 				27F733421BB2055E005A9EC1 /* TPKResultsViewController.m in Sources */,
+				27A035CC1BB7AD3F00200939 /* TPKTopicsViewController.m in Sources */,
 				278EB9981BB1E3B600EE3A65 /* TPKAppDelegate.m in Sources */,
 				278EB9951BB1E3B600EE3A65 /* main.m in Sources */,
 				27F733451BB2075A005A9EC1 /* TPKRootViewController.m in Sources */,
@@ -468,6 +474,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.flipstudio.TweetPeek;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -483,6 +490,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.flipstudio.TweetPeek;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

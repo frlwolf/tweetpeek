@@ -20,11 +20,11 @@ static NSString *TweetCellIdentifier = @"TweetCellIdentifier";
 @property (nonatomic, strong) UICollectionViewFlowLayout *collectionLayout;
 @property (nonatomic, strong) UICollectionView *collectionView;
 
-@property (nonatomic, weak) NSLayoutConstraint *topMarginConstraint;
+@property (nonatomic, strong) NSLayoutConstraint *topMarginConstraint;
 
-@property (nonatomic, weak) NSLayoutConstraint *searchBarHeightConstraintVerticalCompact;
-@property (nonatomic, weak) NSLayoutConstraint *searchBarHeightConstraintHorizontalCompact;
-@property (nonatomic, weak) NSLayoutConstraint *searchBarHeightConstraintRegular;
+@property (nonatomic, strong) NSLayoutConstraint *searchBarHeightConstraintVerticalCompact;
+@property (nonatomic, strong) NSLayoutConstraint *searchBarHeightConstraintHorizontalCompact;
+@property (nonatomic, strong) NSLayoutConstraint *searchBarHeightConstraintRegular;
 
 @end
 
@@ -71,12 +71,16 @@ static NSString *TweetCellIdentifier = @"TweetCellIdentifier";
     [self validateConstraints];
 }
 
-- (void)willTransitionToTraitCollection:(UITraitCollection *)newCollection withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
-    [self validateConstraintsForTraitCollection:newCollection];
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         [self.collectionLayout invalidateLayout];
     } completion:nil];
+}
+
+- (void)willTransitionToTraitCollection:(UITraitCollection *)newCollection withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [self validateConstraintsForTraitCollection:newCollection];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle
@@ -96,9 +100,11 @@ static NSString *TweetCellIdentifier = @"TweetCellIdentifier";
     [_searchBarContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[searchBar]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:NSDictionaryOfVariableBindings(searchBar)]];
     [_searchBarContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[searchBar]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:NSDictionaryOfVariableBindings(searchBar)]];
     
-    self.topMarginConstraint = [NSLayoutConstraint constraintWithItem:searchBar attribute:NSLayoutAttributeTopMargin relatedBy:NSLayoutRelationEqual toItem:_searchBarContainer attribute:NSLayoutAttributeTopMargin multiplier:1.f constant:20.f];
+    self.topMarginConstraint = [NSLayoutConstraint constraintWithItem:searchBar attribute:NSLayoutAttributeTopMargin relatedBy:NSLayoutRelationEqual toItem:_searchBarContainer attribute:NSLayoutAttributeTopMargin multiplier:1.f constant:.0f];
     
     [_searchBarContainer addConstraint:self.topMarginConstraint];
+    
+    [self validateConstraints];
 }
 
 - (void)setTweets:(NSArray *)tweets

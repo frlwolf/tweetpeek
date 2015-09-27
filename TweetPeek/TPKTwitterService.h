@@ -13,6 +13,7 @@
 
 + (instancetype)sharedService;
 
+- (void)requestTrendingWithSuccess:(void(^)(NSArray *))success failure:(void(^)(NSString *, NSError *))failure;
 - (void)requestTweetsWithQuery:(NSString *)query success:(void(^)(NSArray *))success failure:(void(^)(NSString *, NSError *))failure;
 - (void)loadImageWithURL:(NSURL *)URL completion:(void(^)(UIImage *))completion;
 - (void)cancelDownloadTaskForURL:(NSURL *)URL;

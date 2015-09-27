@@ -76,6 +76,50 @@
 	}] resume];
 }
 
+- (void)requestTrendingWithSuccess:(void(^)(NSArray *))success failure:(void(^)(NSString *, NSError *))failure
+{
+    void (^requestBlock)() = ^{
+        NSURL *requestURL = [NSURL URLWithString:@"/1.1/trends/place.json?id=1" relativeToURL:self.twitterAPIEndPoint];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:requestURL];
+        [request addValue:[NSString stringWithFormat:@"Bearer %@", self.bearerToken] forHTTPHeaderField:@"Authorization€"];
+        [request setHTTPMethod:@"GET"];
+        
+        [[self.twitterSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            if (!error)
+            {
+                NSError *error;
+                NSArray *JSONObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+                
+                if (!error)
+                {
+                    NSArray *trends = JSONObject[0][@"trends"];
+                    NSMutableArray *topics = [[NSMutableArray alloc] initWithCapacity:trends.count];
+                    for (NSDictionary *trend in trends)
+                    {
+                        NSString *topic = trend[@"name"];
+
+                        [topics addObject:topic];
+                    }
+                    
+                    success([NSArray arrayWithArray:topics]);
+                }
+                else
+                    failure([error localizedDescription], error);
+            }
+            else
+                failure([error localizedDescription], error);
+        }] resume];
+    };
+    
+    if (self.bearerToken)
+        requestBlock();
+    else
+        [self requestBearerTokenSuccess:^(NSString *token) {
+            self.bearerToken = token;
+            requestBlock();
+        } failure:failure];
+}
+
 - (void)requestTweetsWithQuery:(NSString *)query success:(void(^)(NSArray *))success failure:(void(^)(NSString *, NSError *))failure
 {
 	void (^requestBlock)() = ^{

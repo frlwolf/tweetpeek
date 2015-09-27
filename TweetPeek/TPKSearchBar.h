@@ -10,8 +10,10 @@
 
 @interface TPKSearchBar : UIControl
 
+@property (nonatomic, readonly) UITextField *textField;
+@property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) void(^requestToSearchBlock)(NSString *);
 
-- (void)transitToBlueStyle:(BOOL)animated;
+- (void)transitToBlueStyle;
 
 @end

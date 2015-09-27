@@ -47,8 +47,6 @@
     userImageView.contentMode = UIViewContentModeScaleAspectFit;
     userImageView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    [userImageView addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:nil];
-    
     [self addSubview:userImageView];
     
     self.userImageView = userImageView;
@@ -105,28 +103,36 @@
 {
     NSDictionary *views = NSDictionaryOfVariableBindings(_userNameLabel, _userImageView, _statusLabel);
     
+    NSMutableArray *regularConstraints = [[NSMutableArray alloc] init];
+    NSMutableArray *compactConstraints = [[NSMutableArray alloc] init];
+    
     NSArray *constraints;
     
     constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|-55-[_userImageView(==77)]-33-[_statusLabel]-66-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views];
-    [self.regularConstraints addObjectsFromArray:constraints];
+    [regularConstraints addObjectsFromArray:constraints];
     [self addConstraints:constraints];
     
     constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-33-[_userNameLabel(==25)]-6-[_statusLabel]-33-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views];
-    [self.regularConstraints addObjectsFromArray:constraints];
+    [regularConstraints addObjectsFromArray:constraints];
     [self addConstraints:constraints];
     
     constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|-21-[_userImageView(==40)]-15-[_statusLabel]-30-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views];
-    [self.compactConstraints addObjectsFromArray:constraints];
+    [compactConstraints addObjectsFromArray:constraints];
     [self addConstraints:constraints];
     
     constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-15-[_userNameLabel(==18)]-6-[_statusLabel]-15-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views];
-    [self.compactConstraints addObjectsFromArray:constraints];
+    [compactConstraints addObjectsFromArray:constraints];
     [self addConstraints:constraints];
 
+    self.regularConstraints = regularConstraints;
+    self.compactConstraints = compactConstraints;
+    
     [self addConstraint:[NSLayoutConstraint constraintWithItem:_userNameLabel attribute:NSLayoutAttributeLeftMargin relatedBy:NSLayoutRelationEqual toItem:_statusLabel attribute:NSLayoutAttributeLeftMargin multiplier:1.f constant:.0f]];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:_userNameLabel attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:_statusLabel attribute:NSLayoutAttributeWidth multiplier:1.f constant:.0f]];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:_userImageView attribute:NSLayoutAttributeTopMargin relatedBy:NSLayoutRelationEqual toItem:_userNameLabel attribute:NSLayoutAttributeTopMargin multiplier:1.f constant:0.f]];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:_userImageView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:_userImageView attribute:NSLayoutAttributeWidth multiplier:1.f constant:0.f]];
+    
+    [self validateConstraints];
 }
 
 - (void)validateConstraints

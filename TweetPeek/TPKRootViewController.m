@@ -18,6 +18,8 @@
 @property (nonatomic, strong) TPKSearchViewController *searchViewController;
 @property (nonatomic, strong) TPKResultsViewController *resultsViewController;
 
+@property (nonatomic, weak) UIViewController *topViewController;
+
 @end
 
 @implementation TPKRootViewController
@@ -40,11 +42,10 @@
             }];
         };
         
+        self.searchBar.title = text;
+        
         if (self.resultsViewController == nil)
-        {
-            [self.searchBar transitToBlueStyle:YES];
             [self showResultsController:searchBlock];
-        }
         else
             searchBlock();
     };
@@ -63,6 +64,8 @@
     self.searchViewController = searchViewController;
     
     [self.view addSubview:searchViewController.view];
+    
+    self.topViewController = searchViewController;
 }
 
 - (void)showResultsController:(void(^)())completion
@@ -71,23 +74,30 @@
     resultsViewController.view.frame = self.view.bounds;
     resultsViewController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     resultsViewController.view.alpha = .0f;
+    resultsViewController.searchBar = self.searchBar;
     
     [self addChildViewController:resultsViewController];
     
     self.resultsViewController = resultsViewController;
     
+    self.topViewController = resultsViewController;
+    
     [self transitionFromViewController:self.searchViewController toViewController:resultsViewController duration:.4f options:UIViewAnimationOptionAllowAnimatedContent | UIViewAnimationOptionCurveEaseOut animations:^{
         
+        [self.searchBar transitToBlueStyle];
+        
         resultsViewController.view.alpha = 1.f;
-        resultsViewController.searchBar = self.searchBar;
         
         self.searchViewController.view.alpha = .0f;
-        
-        resultsViewController.searchBar = self.searchBar;
         
     } completion:^(BOOL finished) {
         completion();
     }];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return self.topViewController.preferredStatusBarStyle;
 }
 
 @end

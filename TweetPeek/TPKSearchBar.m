@@ -92,6 +92,16 @@
     [self createConstraints];
 }
 
+#pragma mark - Properties
+#pragma mark Set
+
+- (void)setTitle:(NSString *)title
+{
+    _title = title;
+    
+    self.titleLabel.text = title;
+}
+
 #pragma mark - Actions
 
 - (void)tapInside:(id)sender
@@ -131,13 +141,35 @@
     [self removeTarget:self action:@selector(tapInside:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)transitToBlueStyle:(BOOL)animated
+- (void)transitToBlueStyle
 {
+    [self removeTarget:self action:@selector(tapInside:) forControlEvents:UIControlEventTouchUpInside];
+    
     self.magnifierWidthConstraintRegular.constant = 36.f;
-    self.magnifierHorizontalPositionConstraintRegular.constant = 32.f;
+    
+    [self.regularConstraints removeObject:self.magnifierHorizontalPositionConstraintRegular];
+    [self removeConstraint:self.magnifierHorizontalPositionConstraintRegular];
+    
+    self.magnifierHorizontalPositionConstraintRegular = [NSLayoutConstraint constraintWithItem:_magnifierView attribute:NSLayoutAttributeLeftMargin
+                                                                                     relatedBy:NSLayoutRelationEqual
+                                                                                        toItem:self attribute:NSLayoutAttributeLeftMargin
+                                                                                    multiplier:1.f constant:32.f];
+    
+    [self.regularConstraints addObject:self.magnifierHorizontalPositionConstraintRegular];
+    [self addConstraint:self.magnifierHorizontalPositionConstraintRegular];
     
     self.magnifierWidthConstraintCompact.constant = 26.f;
-    self.magnifierHorizontalPositionConstraintCompact.constant = 23.f;
+    
+    [self.compactConstraints removeObject:self.magnifierHorizontalPositionConstraintCompact];
+    [self removeConstraint:self.magnifierHorizontalPositionConstraintCompact];
+    
+    self.magnifierHorizontalPositionConstraintCompact = [NSLayoutConstraint constraintWithItem:_magnifierView attribute:NSLayoutAttributeLeftMargin
+                                                                                     relatedBy:NSLayoutRelationEqual
+                                                                                        toItem:self attribute:NSLayoutAttributeLeftMargin
+                                                                                    multiplier:1.f constant:23.f];
+    
+    [self.compactConstraints addObject:self.magnifierHorizontalPositionConstraintCompact];
+    [self addConstraint:self.magnifierHorizontalPositionConstraintCompact];
     
     [self.regularConstraints removeObjectsInArray:self.titleLabelConstraints];
     [self.compactConstraints removeObjectsInArray:self.titleLabelConstraints];
@@ -148,7 +180,6 @@
     self.titleLabel.textColor = [UIColor whiteColor];
     
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_titleLabel]-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:NSDictionaryOfVariableBindings(_titleLabel)]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_titleLabel]-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:NSDictionaryOfVariableBindings(_titleLabel)]];
     
     [self layoutIfNeeded];
     
@@ -175,8 +206,6 @@
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
-    _titleLabel.text = [NSString stringWithFormat:@"\"%@\"", textField.text];
-    
     textField.text = @"";
     
     return YES;
@@ -219,11 +248,9 @@
     
     NSMutableArray *regularConstraints = [[NSMutableArray alloc] init];
     NSMutableArray *compactConstraints = [[NSMutableArray alloc] init];
+    NSMutableArray *titleLabelConstraints = [[NSMutableArray alloc] init];
     
     NSLayoutConstraint *constraint;
-    
-//    @property (nonatomic, weak) NSLayoutConstraint *leftMarginZeroConstraint;
-//    @property (nonatomic, weak) NSLayoutConstraint *leftMarginMagnifierConstraint;
     
     constraint = [NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeLeftMargin relatedBy:NSLayoutRelationEqual toItem:_magnifierView attribute:NSLayoutAttributeRight multiplier:1.f constant:36.f];
     [regularConstraints addObject:constraint];
@@ -233,13 +260,13 @@
     [regularConstraints addObject:constraint];
     [self addConstraint:constraint];
     
-    [self.titleLabelConstraints addObject:constraint];
+    [titleLabelConstraints addObject:constraint];
     
     constraint = [NSLayoutConstraint constraintWithItem:_titleLabel attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.f constant:256.f];
     [regularConstraints addObject:constraint];
     [self addConstraint:constraint];
     
-    [self.titleLabelConstraints addObject:constraint];
+    [titleLabelConstraints addObject:constraint];
     
     constraint = [NSLayoutConstraint constraintWithItem:_magnifierView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.f constant:74.f];
     [regularConstraints addObject:constraint];
@@ -261,13 +288,13 @@
     [compactConstraints addObject:constraint];
     [self addConstraint:constraint];
     
-    [self.titleLabelConstraints addObject:constraint];
+    [titleLabelConstraints addObject:constraint];
     
     constraint = [NSLayoutConstraint constraintWithItem:_titleLabel attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.f constant:134.f];
     [compactConstraints addObject:constraint];
     [self addConstraint:constraint];
     
-    [self.titleLabelConstraints addObject:constraint];
+    [titleLabelConstraints addObject:constraint];
     
     constraint = [NSLayoutConstraint constraintWithItem:_magnifierView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.f constant:34.f];
     [compactConstraints addObject:constraint];
@@ -283,6 +310,7 @@
     
     self.regularConstraints = regularConstraints;
     self.compactConstraints = compactConstraints;
+    self.titleLabelConstraints = titleLabelConstraints;
     
     [self validateConstraints];
 //    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:_titleLabel attribute:NSLayoutAttributeRightMargin relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.f constant:fromCenter];
