@@ -20,6 +20,8 @@
 		27A035CC1BB7AD3F00200939 /* TPKTopicsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A035CB1BB7AD3F00200939 /* TPKTopicsViewController.m */; settings = {ASSET_TAGS = (); }; };
 		27A035CE1BB8833900200939 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27A035CD1BB8833800200939 /* Social.framework */; };
 		27A035D11BB885FC00200939 /* NSUserDefaults+TPK.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A035D01BB885FC00200939 /* NSUserDefaults+TPK.m */; settings = {ASSET_TAGS = (); }; };
+		27A035D41BB88D3E00200939 /* action_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 27A035D21BB88D3E00200939 /* action_background.png */; settings = {ASSET_TAGS = (); }; };
+		27A035D51BB88D3E00200939 /* action_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27A035D31BB88D3E00200939 /* action_background@2x.png */; settings = {ASSET_TAGS = (); }; };
 		27F733421BB2055E005A9EC1 /* TPKResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F733411BB2055E005A9EC1 /* TPKResultsViewController.m */; };
 		27F733451BB2075A005A9EC1 /* TPKRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F733441BB20759005A9EC1 /* TPKRootViewController.m */; };
 		27F7334B1BB21756005A9EC1 /* TPKSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F7334A1BB21756005A9EC1 /* TPKSearchBar.m */; };
@@ -70,6 +72,8 @@
 		27A035CD1BB8833800200939 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		27A035CF1BB885FC00200939 /* NSUserDefaults+TPK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+TPK.h"; sourceTree = "<group>"; };
 		27A035D01BB885FC00200939 /* NSUserDefaults+TPK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+TPK.m"; sourceTree = "<group>"; };
+		27A035D21BB88D3E00200939 /* action_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = action_background.png; sourceTree = "<group>"; };
+		27A035D31BB88D3E00200939 /* action_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action_background@2x.png"; sourceTree = "<group>"; };
 		27F733401BB2055E005A9EC1 /* TPKResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKResultsViewController.h; sourceTree = "<group>"; };
 		27F733411BB2055E005A9EC1 /* TPKResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKResultsViewController.m; sourceTree = "<group>"; };
 		27F733431BB20759005A9EC1 /* TPKRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKRootViewController.h; sourceTree = "<group>"; };
@@ -146,6 +150,8 @@
 		278EB9921BB1E3B600EE3A65 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				27A035D21BB88D3E00200939 /* action_background.png */,
+				27A035D31BB88D3E00200939 /* action_background@2x.png */,
 				27F7334C1BB217FB005A9EC1 /* botao_generico_off.png */,
 				27F7334D1BB217FB005A9EC1 /* botao_generico_off@2x.png */,
 				27F7334E1BB217FB005A9EC1 /* botao_generico_on.png */,
@@ -318,8 +324,10 @@
 				27F733551BB217FB005A9EC1 /* botao_generico_off@2x.png in Resources */,
 				278EB9A31BB1E3B600EE3A65 /* LaunchScreen.xib in Resources */,
 				27F733591BB217FB005A9EC1 /* Icon_search_big@2x.png in Resources */,
+				27A035D41BB88D3E00200939 /* action_background.png in Resources */,
 				27F733561BB217FB005A9EC1 /* botao_generico_on.png in Resources */,
 				27F733581BB217FB005A9EC1 /* Icon_search_big.png in Resources */,
+				27A035D51BB88D3E00200939 /* action_background@2x.png in Resources */,
 				27F733541BB217FB005A9EC1 /* botao_generico_off.png in Resources */,
 				278EB9A01BB1E3B600EE3A65 /* Images.xcassets in Resources */,
 				27F7335B1BB217FB005A9EC1 /* Twitter_logo_blue@2x.png in Resources */,

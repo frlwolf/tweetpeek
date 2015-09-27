@@ -94,14 +94,16 @@
         
         self.searchViewController.view.alpha = .0f;
         
+        [self setNeedsStatusBarAppearanceUpdate];
+        
     } completion:^(BOOL finished) {
         completion();
     }];
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle
+- (UIViewController *)childViewControllerForStatusBarStyle
 {
-    return self.topViewController.preferredStatusBarStyle;
+    return self.topViewController;
 }
 
 @end
