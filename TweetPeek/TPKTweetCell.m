@@ -281,7 +281,7 @@
     [regularConstraints addObject:constraint];
     [self.contentView addConstraint:constraint];
     
-    constraint = [NSLayoutConstraint constraintWithItem:self.actionsContainerView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.f constant:240.f];
+    constraint = [NSLayoutConstraint constraintWithItem:self.actionsContainerView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.f constant:272.f];
     [compactConstraints addObject:constraint];
     [self.contentView addConstraint:constraint];
     
@@ -326,6 +326,9 @@
     self.userImageView.alpha = 1.f;
     
     [self showActions:NO animated:NO];
+    
+    for (UIButton *button in self.actionButtons)
+        button.selected = NO;
     
     [[TPKTwitterService sharedService] cancelDownloadTaskForURL:self.tweet.sender.profileImageURL];
 }
