@@ -12,7 +12,16 @@
 #import "TPKTwitterService.h"
 #import "UIColor+TPK.h"
 
+@interface TPKTweetCell ()
+
+@property (nonatomic, strong) NSMutableArray *regularConstraints;
+@property (nonatomic, strong) NSMutableArray *compactConstraints;
+
+@end
+
 @implementation TPKTweetCell
+
+#pragma mark - Initialization
 
 - (instancetype)init
 {
@@ -45,7 +54,6 @@
     self.userImageView = userImageView;
     
     UILabel *userNameLabel = [[UILabel alloc] init];
-    userNameLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:22.f];
     userNameLabel.textColor = UIColorWithRGB(94, 159, 202);
     userNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
     
@@ -54,7 +62,6 @@
     self.userNameLabel = userNameLabel;
     
     UILabel *statusLabel = [[UILabel alloc] init];
-    statusLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:22.f];
     statusLabel.textColor = [UIColor colorWithWhite:.2f alpha:1.f];
     statusLabel.numberOfLines = 0;
     statusLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -63,16 +70,11 @@
     
     self.statusLabel = statusLabel;
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(userNameLabel, userImageView, statusLabel);
-    
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-55-[userImageView(==77)]-33-[statusLabel]-66-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:userNameLabel attribute:NSLayoutAttributeLeftMargin relatedBy:NSLayoutRelationEqual toItem:statusLabel attribute:NSLayoutAttributeLeftMargin multiplier:1.f constant:.0f]];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:userNameLabel attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:statusLabel attribute:NSLayoutAttributeWidth multiplier:1.f constant:.0f]];
-    
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-33-[userNameLabel(==25)]-6-[statusLabel]-33-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:userImageView attribute:NSLayoutAttributeTopMargin relatedBy:NSLayoutRelationEqual toItem:userNameLabel attribute:NSLayoutAttributeTopMargin multiplier:1.f constant:0.f]];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:userImageView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.f constant:77.f]];
+    [self createConstraints];
 }
+
+#pragma mark - Properties
+#pragma mark Set
 
 - (void)setTweet:(TPKTweet *)tweet
 {
@@ -80,7 +82,7 @@
     
     self.userNameLabel.text = tweet.sender.name;
     self.statusLabel.text = tweet.text;
-
+    
     if (tweet.sender.profileImage)
         self.userImageView.image = tweet.sender.profileImage;
     else
@@ -96,6 +98,65 @@
         }];
     }
 }
+
+#pragma mark - Layout
+
+- (void)createConstraints
+{
+    NSDictionary *views = NSDictionaryOfVariableBindings(_userNameLabel, _userImageView, _statusLabel);
+    
+    NSArray *constraints;
+    
+    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|-55-[_userImageView(==77)]-33-[_statusLabel]-66-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views];
+    [self.regularConstraints addObjectsFromArray:constraints];
+    [self addConstraints:constraints];
+    
+    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-33-[_userNameLabel(==25)]-6-[_statusLabel]-33-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views];
+    [self.regularConstraints addObjectsFromArray:constraints];
+    [self addConstraints:constraints];
+    
+    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|-21-[_userImageView(==40)]-15-[_statusLabel]-30-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views];
+    [self.compactConstraints addObjectsFromArray:constraints];
+    [self addConstraints:constraints];
+    
+    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-15-[_userNameLabel(==18)]-6-[_statusLabel]-15-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views];
+    [self.compactConstraints addObjectsFromArray:constraints];
+    [self addConstraints:constraints];
+
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_userNameLabel attribute:NSLayoutAttributeLeftMargin relatedBy:NSLayoutRelationEqual toItem:_statusLabel attribute:NSLayoutAttributeLeftMargin multiplier:1.f constant:.0f]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_userNameLabel attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:_statusLabel attribute:NSLayoutAttributeWidth multiplier:1.f constant:.0f]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_userImageView attribute:NSLayoutAttributeTopMargin relatedBy:NSLayoutRelationEqual toItem:_userNameLabel attribute:NSLayoutAttributeTopMargin multiplier:1.f constant:0.f]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_userImageView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:_userImageView attribute:NSLayoutAttributeWidth multiplier:1.f constant:0.f]];
+}
+
+- (void)validateConstraints
+{
+    if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact || self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact)
+    {
+        self.userNameLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:15.f];
+        self.statusLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.f];
+        
+        [NSLayoutConstraint activateConstraints:self.compactConstraints];
+        [NSLayoutConstraint deactivateConstraints:self.regularConstraints];
+    }
+    else
+    {
+        self.userNameLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:22.f];
+        self.statusLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:22.f];
+        
+        [NSLayoutConstraint activateConstraints:self.regularConstraints];
+        [NSLayoutConstraint deactivateConstraints:self.compactConstraints];
+    }
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    [self validateConstraints];
+}
+
+#pragma mark - Collection cell
 
 - (void)prepareForReuse
 {

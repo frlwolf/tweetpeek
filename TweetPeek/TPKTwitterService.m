@@ -129,7 +129,6 @@
         CGRect bounds = CGRectMake(.5, .5, dimension, dimension);
         
         UIGraphicsBeginImageContextWithOptions(bounds.size, NO, [UIScreen mainScreen].scale);
-        CGContextSetAllowsAntialiasing(UIGraphicsGetCurrentContext(), YES);
         
         UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:bounds cornerRadius:floorf(bounds.size.height / 2.f)];
         [bezierPath addClip];
@@ -137,6 +136,7 @@
         [image drawInRect:bounds];
         
         UIImage *finalImage = UIGraphicsGetImageFromCurrentImageContext();
+        
         UIGraphicsEndImageContext();
         
         dispatch_async(dispatch_get_main_queue(), ^{

@@ -10,17 +10,27 @@
 #import "TPKSearchBar.h"
 #import "TPKTweet.h"
 #import "TPKTweetCell.h"
+#import "UIColor+TPK.h"
 
 static NSString *TweetCellIdentifier = @"TweetCellIdentifier";
 
 @interface TPKResultsViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
+@property (nonatomic, strong) UIView *searchBarContainer;
 @property (nonatomic, strong) UICollectionViewFlowLayout *collectionLayout;
 @property (nonatomic, strong) UICollectionView *collectionView;
+
+@property (nonatomic, weak) NSLayoutConstraint *topMarginConstraint;
+
+@property (nonatomic, weak) NSLayoutConstraint *searchBarHeightConstraintVerticalCompact;
+@property (nonatomic, weak) NSLayoutConstraint *searchBarHeightConstraintHorizontalCompact;
+@property (nonatomic, weak) NSLayoutConstraint *searchBarHeightConstraintRegular;
 
 @end
 
 @implementation TPKResultsViewController
+
+#pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
@@ -42,6 +52,31 @@ static NSString *TweetCellIdentifier = @"TweetCellIdentifier";
     [self.view addSubview:collectionView];
     
     self.collectionView = collectionView;
+    
+    UIView *searchBarContainer = [[UIView alloc] init];
+    searchBarContainer.backgroundColor = [UIColor tpk_blueColor];
+    searchBarContainer.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [self.view addSubview:searchBarContainer];
+    
+    self.searchBarContainer = searchBarContainer;
+    
+    [self createConstraints];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self validateConstraints];
+}
+
+- (void)willTransitionToTraitCollection:(UITraitCollection *)newCollection withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [self validateConstraintsForTraitCollection:newCollection];
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        [self.collectionLayout invalidateLayout];
+    } completion:nil];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle
@@ -49,25 +84,21 @@ static NSString *TweetCellIdentifier = @"TweetCellIdentifier";
     return UIStatusBarStyleLightContent;
 }
 
+#pragma mark - Properties
+#pragma mark Set
+
 - (void)setSearchBar:(TPKSearchBar *)searchBar
 {
     _searchBar = searchBar;
     
-    UIView *searchBarContainer = [[UIView alloc] init];
-    searchBarContainer.backgroundColor = searchBar.backgroundColor;
-    searchBarContainer.translatesAutoresizingMaskIntoConstraints = NO;
+    [_searchBarContainer addSubview:_searchBar];
     
-    [searchBarContainer addSubview:searchBar];
-    [self.view addSubview:searchBarContainer];
+    [_searchBarContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[searchBar]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:NSDictionaryOfVariableBindings(searchBar)]];
+    [_searchBarContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[searchBar]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:NSDictionaryOfVariableBindings(searchBar)]];
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(searchBar, searchBarContainer, _collectionView);
+    self.topMarginConstraint = [NSLayoutConstraint constraintWithItem:searchBar attribute:NSLayoutAttributeTopMargin relatedBy:NSLayoutRelationEqual toItem:_searchBarContainer attribute:NSLayoutAttributeTopMargin multiplier:1.f constant:20.f];
     
-    [searchBarContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[searchBar]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
-    [searchBarContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[searchBar]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
-    
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[searchBarContainer(==108)][_collectionView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[searchBarContainer]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[_collectionView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
+    [_searchBarContainer addConstraint:self.topMarginConstraint];
 }
 
 - (void)setTweets:(NSArray *)tweets
@@ -76,6 +107,72 @@ static NSString *TweetCellIdentifier = @"TweetCellIdentifier";
     
     [self.collectionView reloadData];
 }
+
+#pragma mark - Layout
+
+- (void)createConstraints
+{
+    NSDictionary *views = NSDictionaryOfVariableBindings(_searchBarContainer, _collectionView);
+    
+    NSLayoutConstraint *constraint;
+    
+    constraint = [NSLayoutConstraint constraintWithItem:_searchBarContainer attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.f constant:108.f];
+    [self.view addConstraint:constraint];
+    
+    self.searchBarHeightConstraintRegular = constraint;
+    
+    constraint = [NSLayoutConstraint constraintWithItem:_searchBarContainer attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.f constant:64.f];
+    [self.view addConstraint:constraint];
+    
+    self.searchBarHeightConstraintHorizontalCompact = constraint;
+    
+    constraint = [NSLayoutConstraint constraintWithItem:_searchBarContainer attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.f constant:44.f];
+    [self.view addConstraint:constraint];
+    
+    self.searchBarHeightConstraintVerticalCompact = constraint;
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_searchBarContainer][_collectionView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[_searchBarContainer]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[_collectionView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
+    
+    [self validateConstraints];
+}
+
+- (void)validateConstraints
+{
+    [self validateConstraintsForTraitCollection:self.traitCollection];
+}
+
+- (void)validateConstraintsForTraitCollection:(UITraitCollection *)traitCollection
+{
+    self.topMarginConstraint.constant = 20.f;
+    
+    if (traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact)
+    {
+        self.searchBarHeightConstraintRegular.active = NO;
+        self.searchBarHeightConstraintHorizontalCompact.active = NO;
+        self.searchBarHeightConstraintVerticalCompact.active = YES;
+        
+        self.topMarginConstraint.constant = .0f;
+    }
+    else if (traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact)
+    {
+        self.searchBarHeightConstraintRegular.active = NO;
+        self.searchBarHeightConstraintHorizontalCompact.active = YES;
+        self.searchBarHeightConstraintVerticalCompact.active = NO;
+    }
+    else
+    {
+        self.searchBarHeightConstraintRegular.active = YES;
+        self.searchBarHeightConstraintHorizontalCompact.active = NO;
+        self.searchBarHeightConstraintVerticalCompact.active = NO;
+    }
+    
+    [self.view layoutIfNeeded];
+}
+
+#pragma mark - Collection view
+#pragma mark Data source
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
@@ -91,22 +188,40 @@ static NSString *TweetCellIdentifier = @"TweetCellIdentifier";
     return cell;
 }
 
+#pragma mark Flow layout delegate
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    CGFloat width = collectionView.frame.size.width > collectionView.frame.size.height ? floorf(collectionView.frame.size.width / 2.0f) - 1 : collectionView.frame.size.width;
-    
     TPKTweet *tweet = self.tweets[indexPath.row];
+    CGFloat width = collectionView.frame.size.width, height;
+    CGFloat minimumSize, textWidth, fontSize;
+    UITraitCollection *traitCollection = self.traitCollection;
 
-    CGSize constraintSize = CGSizeMake(width - 77 - 66 - 55 - 33, CGFLOAT_MAX);
+    if (traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact || traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact)
+    {
+        textWidth = width - 40 - 30 - 21 - 15;
+        height = 30 + 18 + 6;
+        minimumSize = 77.f;
+        fontSize = 15.f;
+    }
+    else
+    {
+        textWidth = width - 77 - 66 - 55 - 33;
+        height = 66 + 25 + 6;
+        minimumSize = 156.f;
+        fontSize = 22.f;
+    }
+    
+    CGSize constraintSize = CGSizeMake(textWidth, CGFLOAT_MAX);
 
     UILabel *dumb = [[UILabel alloc] init];
     dumb.text = tweet.text;
-    dumb.font = [UIFont fontWithName:@"HelveticaNeue" size:22.f];
+    dumb.font = [UIFont fontWithName:@"HelveticaNeue" size:fontSize];
     dumb.numberOfLines = 0;
+
+    height = floorf(height + [dumb sizeThatFits:constraintSize].height);
     
-    CGFloat height = floorf(66 + 25 + 6 + [dumb sizeThatFits:constraintSize].height);
-    
-    return CGSizeMake(width, height < 156.f ? 156.f : height);
+    return CGSizeMake(width, height < minimumSize ? minimumSize : height);
 }
 
 @end
