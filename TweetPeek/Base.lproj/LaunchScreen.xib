@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -12,31 +11,84 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2015 Felipe Lobo. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
-                    <rect key="frame" x="20" y="439" width="441" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TweetPeek" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="kId-c2-rCX">
-                    <rect key="frame" x="20" y="140" width="441" height="43"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Twitter_logo_blue.png" translatesAutoresizingMaskIntoConstraints="NO" id="xnZ-Up-Mv4">
+                    <rect key="frame" x="158" y="172" width="165" height="135"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="88" id="EdR-JC-P4s"/>
+                        <constraint firstAttribute="width" constant="88" id="L2l-55-QGS">
+                            <variation key="heightClass=compact-widthClass=regular" constant="480"/>
+                        </constraint>
+                        <constraint firstAttribute="width" constant="88" id="VLn-F3-StU">
+                            <variation key="heightClass=regular-widthClass=compact" constant="480"/>
+                        </constraint>
+                        <constraint firstAttribute="height" constant="88" id="ocf-Z5-95e"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="EdR-JC-P4s"/>
+                            <exclude reference="L2l-55-QGS"/>
+                            <exclude reference="VLn-F3-StU"/>
+                            <exclude reference="ocf-Z5-95e"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=compact-widthClass=regular">
+                        <mask key="constraints">
+                            <include reference="EdR-JC-P4s"/>
+                            <include reference="L2l-55-QGS"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="VLn-F3-StU"/>
+                            <include reference="ocf-Z5-95e"/>
+                        </mask>
+                    </variation>
+                </imageView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.95999999999999996" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="bottom" multiplier="1/3" constant="1" id="5cJ-9S-tgC"/>
-                <constraint firstAttribute="centerX" secondItem="kId-c2-rCX" secondAttribute="centerX" id="Koa-jz-hwk"/>
-                <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="Kzo-t9-V3l"/>
-                <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="MfP-vx-nX0"/>
-                <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="ZEH-qu-HZ9"/>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="fvb-Df-36g"/>
+                <constraint firstItem="xnZ-Up-Mv4" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="5TU-x3-Bl0"/>
+                <constraint firstItem="xnZ-Up-Mv4" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="DWQ-Hu-tTs"/>
+                <constraint firstItem="xnZ-Up-Mv4" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="MYu-Lo-zSf"/>
+                <constraint firstItem="xnZ-Up-Mv4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Vmn-c7-fEG"/>
+                <constraint firstItem="xnZ-Up-Mv4" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="iXI-ri-s0R"/>
+                <constraint firstItem="xnZ-Up-Mv4" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="kLS-sY-CoK"/>
+                <constraint firstItem="xnZ-Up-Mv4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="sVl-IQ-OSG"/>
+                <constraint firstAttribute="trailing" secondItem="xnZ-Up-Mv4" secondAttribute="trailing" id="xLd-7N-NT0"/>
+                <constraint firstAttribute="trailing" secondItem="xnZ-Up-Mv4" secondAttribute="trailing" id="ynb-ZD-l1t"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="DWQ-Hu-tTs"/>
+                    <exclude reference="Vmn-c7-fEG"/>
+                    <exclude reference="iXI-ri-s0R"/>
+                    <exclude reference="kLS-sY-CoK"/>
+                    <exclude reference="sVl-IQ-OSG"/>
+                    <exclude reference="xLd-7N-NT0"/>
+                    <exclude reference="ynb-ZD-l1t"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=compact-widthClass=regular">
+                <mask key="constraints">
+                    <include reference="Vmn-c7-fEG"/>
+                    <include reference="iXI-ri-s0R"/>
+                    <include reference="kLS-sY-CoK"/>
+                    <include reference="xLd-7N-NT0"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=compact">
+                <mask key="constraints">
+                    <include reference="DWQ-Hu-tTs"/>
+                    <include reference="sVl-IQ-OSG"/>
+                    <include reference="ynb-ZD-l1t"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="548" y="455"/>
         </view>
     </objects>
+    <resources>
+        <image name="Twitter_logo_blue.png" width="165" height="135"/>
+    </resources>
 </document>

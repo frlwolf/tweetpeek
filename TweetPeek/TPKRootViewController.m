@@ -7,10 +7,11 @@
 //
 
 #import "TPKRootViewController.h"
-#import "TPKSearchViewController.h"
+#import "NSUserDefaults+TPK.h"
 #import "TPKResultsViewController.h"
-#import "TPKTwitterService.h"
 #import "TPKSearchBar.h"
+#import "TPKSearchViewController.h"
+#import "TPKTwitterService.h"
 #import "UIColor+TPK.h"
 
 @interface TPKRootViewController ()
@@ -32,6 +33,9 @@
     searchBar.backgroundColor = [UIColor whiteColor];
     searchBar.translatesAutoresizingMaskIntoConstraints = NO;
     searchBar.requestToSearchBlock = ^(NSString *text){
+        
+        [[NSUserDefaults standardUserDefaults] tpk_addRecentQuery:text];
+        
         void(^searchBlock)() = ^{
             [[TPKTwitterService sharedService] requestTweetsWithQuery:text success:^(NSArray *tweets) {
                 dispatch_async(dispatch_get_main_queue(), ^{

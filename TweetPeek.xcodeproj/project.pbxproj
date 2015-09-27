@@ -18,6 +18,8 @@
 		278EB9AF1BB1E3B700EE3A65 /* TweetPeekTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 278EB9AE1BB1E3B700EE3A65 /* TweetPeekTests.m */; };
 		278EB9BA1BB1EBCC00EE3A65 /* TPKSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 278EB9B91BB1EBCC00EE3A65 /* TPKSearchViewController.m */; };
 		27A035CC1BB7AD3F00200939 /* TPKTopicsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A035CB1BB7AD3F00200939 /* TPKTopicsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		27A035CE1BB8833900200939 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27A035CD1BB8833800200939 /* Social.framework */; };
+		27A035D11BB885FC00200939 /* NSUserDefaults+TPK.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A035D01BB885FC00200939 /* NSUserDefaults+TPK.m */; settings = {ASSET_TAGS = (); }; };
 		27F733421BB2055E005A9EC1 /* TPKResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F733411BB2055E005A9EC1 /* TPKResultsViewController.m */; };
 		27F733451BB2075A005A9EC1 /* TPKRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F733441BB20759005A9EC1 /* TPKRootViewController.m */; };
 		27F7334B1BB21756005A9EC1 /* TPKSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F7334A1BB21756005A9EC1 /* TPKSearchBar.m */; };
@@ -65,6 +67,9 @@
 		278EB9B91BB1EBCC00EE3A65 /* TPKSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKSearchViewController.m; sourceTree = "<group>"; };
 		27A035CA1BB7AD3F00200939 /* TPKTopicsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKTopicsViewController.h; sourceTree = "<group>"; };
 		27A035CB1BB7AD3F00200939 /* TPKTopicsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKTopicsViewController.m; sourceTree = "<group>"; };
+		27A035CD1BB8833800200939 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		27A035CF1BB885FC00200939 /* NSUserDefaults+TPK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+TPK.h"; sourceTree = "<group>"; };
+		27A035D01BB885FC00200939 /* NSUserDefaults+TPK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+TPK.m"; sourceTree = "<group>"; };
 		27F733401BB2055E005A9EC1 /* TPKResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKResultsViewController.h; sourceTree = "<group>"; };
 		27F733411BB2055E005A9EC1 /* TPKResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKResultsViewController.m; sourceTree = "<group>"; };
 		27F733431BB20759005A9EC1 /* TPKRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKRootViewController.h; sourceTree = "<group>"; };
@@ -88,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27A035CE1BB8833900200939 /* Social.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,6 +137,7 @@
 				27A035C71BB70D4A00200939 /* View Controller */,
 				278EB9A11BB1E3B600EE3A65 /* LaunchScreen.xib */,
 				278EB99F1BB1E3B600EE3A65 /* Images.xcassets */,
+				27A035CD1BB8833800200939 /* Social.framework */,
 				278EB9921BB1E3B600EE3A65 /* Supporting Files */,
 			);
 			path = TweetPeek;
@@ -221,6 +228,8 @@
 			children = (
 				27F7335C1BB21861005A9EC1 /* UIColor+TPK.h */,
 				27F7335D1BB21861005A9EC1 /* UIColor+TPK.m */,
+				27A035CF1BB885FC00200939 /* NSUserDefaults+TPK.h */,
+				27A035D01BB885FC00200939 /* NSUserDefaults+TPK.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -339,6 +348,7 @@
 				27F733421BB2055E005A9EC1 /* TPKResultsViewController.m in Sources */,
 				27A035CC1BB7AD3F00200939 /* TPKTopicsViewController.m in Sources */,
 				278EB9981BB1E3B600EE3A65 /* TPKAppDelegate.m in Sources */,
+				27A035D11BB885FC00200939 /* NSUserDefaults+TPK.m in Sources */,
 				278EB9951BB1E3B600EE3A65 /* main.m in Sources */,
 				27F733451BB2075A005A9EC1 /* TPKRootViewController.m in Sources */,
 				276D4B011BB48E6100022D22 /* TPKTwitterUser.m in Sources */,

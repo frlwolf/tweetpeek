@@ -7,6 +7,7 @@
 //
 
 #import "TPKSearchViewController.h"
+#import "NSUserDefaults+TPK.h"
 #import "TPKSearchBar.h"
 #import "TPKTopicsViewController.h"
 #import "TPKTwitterService.h"
@@ -73,8 +74,9 @@
     
     TPKTopicsViewController *lastQueriesController = [[TPKTopicsViewController alloc] init];
     lastQueriesController.view.translatesAutoresizingMaskIntoConstraints = NO;
-    lastQueriesController.topics = @[@"a", @"b", @"c", @"d", @"e"];
+    lastQueriesController.topics = [[NSUserDefaults standardUserDefaults] tpk_recentQueries];
     lastQueriesController.title = NSLocalizedString(@"Recent searches", nil);
+    lastQueriesController.delegate = self;
     
     [extraContainer addSubview:lastQueriesController.view];
     [self addChildViewController:lastQueriesController];
@@ -124,12 +126,14 @@
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
-    [self validateConstraintsForSize:size];
+    if (self.view.superview)
+        [self validateConstraintsForSize:size];
 }
 
 - (void)willTransitionToTraitCollection:(UITraitCollection *)newCollection withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
-    [self validateConstraintsForTraitCollection:newCollection];
+    if (self.view.superview)
+        [self validateConstraintsForTraitCollection:newCollection];
 }
 
 #pragma mark - Layout
