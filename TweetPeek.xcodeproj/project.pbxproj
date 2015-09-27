@@ -22,6 +22,7 @@
 		27A035D11BB885FC00200939 /* NSUserDefaults+TPK.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A035D01BB885FC00200939 /* NSUserDefaults+TPK.m */; settings = {ASSET_TAGS = (); }; };
 		27A035D41BB88D3E00200939 /* action_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 27A035D21BB88D3E00200939 /* action_background.png */; settings = {ASSET_TAGS = (); }; };
 		27A035D51BB88D3E00200939 /* action_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27A035D31BB88D3E00200939 /* action_background@2x.png */; settings = {ASSET_TAGS = (); }; };
+		27A035D91BB8AE2C00200939 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 27A035DB1BB8AE2C00200939 /* Localizable.strings */; };
 		27F733421BB2055E005A9EC1 /* TPKResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F733411BB2055E005A9EC1 /* TPKResultsViewController.m */; };
 		27F733451BB2075A005A9EC1 /* TPKRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F733441BB20759005A9EC1 /* TPKRootViewController.m */; };
 		27F7334B1BB21756005A9EC1 /* TPKSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F7334A1BB21756005A9EC1 /* TPKSearchBar.m */; };
@@ -74,6 +75,9 @@
 		27A035D01BB885FC00200939 /* NSUserDefaults+TPK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+TPK.m"; sourceTree = "<group>"; };
 		27A035D21BB88D3E00200939 /* action_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = action_background.png; sourceTree = "<group>"; };
 		27A035D31BB88D3E00200939 /* action_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action_background@2x.png"; sourceTree = "<group>"; };
+		27A035D81BB8ADFC00200939 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		27A035DA1BB8AE2C00200939 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		27A035DC1BB8AE3100200939 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		27F733401BB2055E005A9EC1 /* TPKResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKResultsViewController.h; sourceTree = "<group>"; };
 		27F733411BB2055E005A9EC1 /* TPKResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKResultsViewController.m; sourceTree = "<group>"; };
 		27F733431BB20759005A9EC1 /* TPKRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKRootViewController.h; sourceTree = "<group>"; };
@@ -162,6 +166,7 @@
 				27F733531BB217FB005A9EC1 /* Twitter_logo_blue@2x.png */,
 				278EB9931BB1E3B600EE3A65 /* Info.plist */,
 				278EB9941BB1E3B600EE3A65 /* main.m */,
+				27A035DB1BB8AE2C00200939 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -304,6 +309,7 @@
 			knownRegions = (
 				en,
 				Base,
+				pt,
 			);
 			mainGroup = 278EB9861BB1E3B600EE3A65;
 			productRefGroup = 278EB9901BB1E3B600EE3A65 /* Products */;
@@ -330,6 +336,7 @@
 				27A035D51BB88D3E00200939 /* action_background@2x.png in Resources */,
 				27F733541BB217FB005A9EC1 /* botao_generico_off.png in Resources */,
 				278EB9A01BB1E3B600EE3A65 /* Images.xcassets in Resources */,
+				27A035D91BB8AE2C00200939 /* Localizable.strings in Resources */,
 				27F7335B1BB217FB005A9EC1 /* Twitter_logo_blue@2x.png in Resources */,
 				27F733571BB217FB005A9EC1 /* botao_generico_on@2x.png in Resources */,
 				27F7335A1BB217FB005A9EC1 /* Twitter_logo_blue.png in Resources */,
@@ -389,8 +396,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				278EB9A21BB1E3B600EE3A65 /* Base */,
+				27A035D81BB8ADFC00200939 /* pt */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		27A035DB1BB8AE2C00200939 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				27A035DA1BB8AE2C00200939 /* en */,
+				27A035DC1BB8AE3100200939 /* pt */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

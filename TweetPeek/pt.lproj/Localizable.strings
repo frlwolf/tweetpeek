@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  TweetPeek
+
+  Created by Felipe Lobo on 9/27/15.
+  Copyright © 2015 Felipe Lobo. All rights reserved.
+*/
+
+"Search it" = "Pesquise";
+"Recent searches" = "Recentes";
+"Trending now" = "Tendências";
