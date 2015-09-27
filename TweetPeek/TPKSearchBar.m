@@ -134,7 +134,9 @@
     } completion:^(BOOL finished) {
         self.titleLabel.hidden = YES;
         self.titleLabel.alpha = 1.f;
+        
         self.textField.userInteractionEnabled = YES;
+        
         [self.textField becomeFirstResponder];
     }];
     
@@ -186,6 +188,8 @@
     self.backgroundColor = [UIColor tpk_blueColor];
     
     self.textField.textColor = [UIColor whiteColor];
+    self.textField.userInteractionEnabled = YES;
+    
     self.titleFontRegular = self.fieldFontRegular = [UIFont fontWithName:@"HelveticaNeue-Medium" size:27];
     self.titleFontCompact = self.fieldFontCompact = [UIFont fontWithName:@"HelveticaNeue-Medium" size:17];
     
@@ -207,6 +211,9 @@
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
     textField.text = @"";
+    
+    if (textField.text.length == 0)
+        _titleLabel.text = self.title;
     
     return YES;
 }

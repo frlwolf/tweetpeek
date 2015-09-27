@@ -22,6 +22,8 @@
 
 @implementation TPKTopicsViewController
 
+#pragma mark - View lifecycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -76,6 +78,9 @@
     [self validateConstraintsForTraitCollection:newCollection];
 }
 
+#pragma mark - Properties
+#pragma mark Set
+
 - (void)setTitle:(NSString *)title
 {
     [super setTitle:title];
@@ -97,10 +102,14 @@
     }
 }
 
+#pragma mark - Actions
+
 - (void)didTapTopicButton:(UIButton *)sender
 {
     [_delegate topicsViewController:self didSelectTopic:[sender titleForState:UIControlStateNormal]];
 }
+
+#pragma mark - Layout
 
 - (void)createConstraints
 {
