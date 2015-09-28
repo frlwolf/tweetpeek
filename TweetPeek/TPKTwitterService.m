@@ -8,6 +8,7 @@
 
 #import "TPKTwitterService.h"
 #import "TPKTweet.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define kGetTokenIdentifier				@"kGetTokenIdentifier"
 
@@ -81,7 +82,7 @@
     void (^requestBlock)() = ^{
         NSURL *requestURL = [NSURL URLWithString:@"/1.1/trends/place.json?id=1" relativeToURL:self.twitterAPIEndPoint];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:requestURL];
-        [request addValue:[NSString stringWithFormat:@"Bearer %@", self.bearerToken] forHTTPHeaderField:@"Authorization€"];
+        [request addValue:[NSString stringWithFormat:@"Bearer %@", self.bearerToken] forHTTPHeaderField:@"Authorization"];
         [request setHTTPMethod:@"GET"];
         
         [[self.twitterSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -125,7 +126,7 @@
 	void (^requestBlock)() = ^{
 		NSURL *requestURL = [NSURL URLWithString:[NSString stringWithFormat:@"/1.1/search/tweets.json?q=%@;&count=50", [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] relativeToURL:self.twitterAPIEndPoint];
 		NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:requestURL];
-		[request addValue:[NSString stringWithFormat:@"Bearer %@", self.bearerToken] forHTTPHeaderField:@"Authorization€"];
+		[request addValue:[NSString stringWithFormat:@"Bearer %@", self.bearerToken] forHTTPHeaderField:@"Authorization"];
 		[request setHTTPMethod:@"GET"];
 
 		[[self.twitterSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -173,11 +174,15 @@
         CGRect bounds = CGRectMake(.5, .5, dimension, dimension);
         
         UIGraphicsBeginImageContextWithOptions(bounds.size, NO, [UIScreen mainScreen].scale);
+        CGContextRef context = UIGraphicsGetCurrentContext();
         
-        UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:bounds cornerRadius:floorf(bounds.size.height / 2.f)];
-        [bezierPath addClip];
-        
-        [image drawInRect:bounds];
+        if (context)
+        {
+            UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:bounds cornerRadius:floorf(bounds.size.height / 2.f)];
+            [bezierPath addClip];
+            
+            [image drawInRect:bounds];
+        }
         
         UIImage *finalImage = UIGraphicsGetImageFromCurrentImageContext();
         
