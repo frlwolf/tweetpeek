@@ -11,6 +11,7 @@
 #import "TPKTweet.h"
 #import "TPKTweetCell.h"
 #import "UIColor+TPK.h"
+#import <Social/Social.h>
 
 static NSString *TweetCellIdentifier = @"TweetCellIdentifier";
 
@@ -188,8 +189,12 @@ static NSString *TweetCellIdentifier = @"TweetCellIdentifier";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     TPKTweet *tweet = self.tweets[indexPath.row];
+    
     TPKTweetCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:TweetCellIdentifier forIndexPath:indexPath];
     cell.tweet = tweet;
+    cell.tweetCellActionBlock = ^(TPKTweetCellAction action) {
+        // 
+    };
     
     return cell;
 }

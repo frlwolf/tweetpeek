@@ -9,11 +9,21 @@
 #import <UIKit/UIKit.h>
 
 @class TPKTweet;
+
+typedef NS_ENUM(short, TPKTweetCellAction) {
+    TPKTweetCellActionFavorite,
+    TPKTweetCellActionRetweet,
+    TPKTweetCellActionReply,
+    TPKTweetCellActionForward
+};
+
 @interface TPKTweetCell : UICollectionViewCell
 
 @property (nonatomic, strong) UIImageView *userImageView;
 @property (nonatomic, strong) UILabel *userNameLabel;
 @property (nonatomic, strong) UILabel *statusLabel;
 @property (nonatomic, strong) TPKTweet *tweet;
+
+@property (nonatomic, copy) void(^tweetCellActionBlock)(TPKTweetCellAction);
 
 @end

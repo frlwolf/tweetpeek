@@ -155,6 +155,11 @@
 - (void)didTapActionButton:(UIButton *)sender
 {
     sender.selected = !sender.selected;
+    
+    int index = (int)[self.actionButtons indexOfObject:sender];
+    
+    if (_tweetCellActionBlock)
+        _tweetCellActionBlock((TPKTweetCellAction)index);
 }
 
 - (void)didSwipe:(UISwipeGestureRecognizer *)swipe
@@ -202,7 +207,7 @@
         [regularConstraints addObjectsFromArray:constraints];
         [self.actionsContainerView addConstraints:constraints];
         
-        constraints = [NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-15-[%@(==40)]", bx] options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:actionViews];
+        constraints = [NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-15-[%@(==44)]", bx] options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:actionViews];
         [compactConstraints addObjectsFromArray:constraints];
         [self.actionsContainerView addConstraints:constraints];
         
