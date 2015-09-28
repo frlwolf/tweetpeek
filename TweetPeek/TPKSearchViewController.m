@@ -92,9 +92,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             trendingController.topics = trends;
         });
-    } failure:^(NSString *description, NSError *error) {
-        //
-    }];
+    } failure:nil];
     
     [extraContainer addSubview:trendingController.view];
     [self addChildViewController:trendingController];

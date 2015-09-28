@@ -42,7 +42,12 @@
                     self.resultsViewController.tweets = tweets;
                 });
             } failure:^(NSString *description, NSError *error) {
-                //
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Something went wrong", nil) message:description preferredStyle:UIAlertControllerStyleAlert];
+                    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil) style:UIAlertActionStyleDefault handler:nil]];
+                    
+                    [self presentViewController:alertController animated:YES completion:nil];
+                });
             }];
         };
         

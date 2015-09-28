@@ -103,10 +103,10 @@
                     
                     success([NSArray arrayWithArray:topics]);
                 }
-                else
+                else if (failure)
                     failure([error localizedDescription], error);
             }
-            else
+            else if (failure)
                 failure([error localizedDescription], error);
         }] resume];
     };
