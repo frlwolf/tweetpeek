@@ -11,9 +11,9 @@
 @class TPKTweet;
 
 typedef NS_ENUM(short, TPKTweetCellAction) {
-    TPKTweetCellActionFavorite,
-    TPKTweetCellActionRetweet,
-    TPKTweetCellActionReply,
+    TPKTweetCellActionHideImage,
+    TPKTweetCellActionDarkAppearance,
+    TPKTweetCellActionScreenName,
     TPKTweetCellActionForward
 };
 
@@ -24,6 +24,6 @@ typedef NS_ENUM(short, TPKTweetCellAction) {
 @property (nonatomic, strong) UILabel *statusLabel;
 @property (nonatomic, strong) TPKTweet *tweet;
 
-@property (nonatomic, copy) void(^tweetCellActionBlock)(TPKTweetCellAction);
+@property (nonatomic, copy) void(^forwardTweetActionBlock)();
 
 @end

@@ -10,6 +10,7 @@
 #import "TPKSearchBar.h"
 #import "TPKTweet.h"
 #import "TPKTweetCell.h"
+#import "TPKTwitterUser.h"
 #import "UIColor+TPK.h"
 #import <Social/Social.h>
 
@@ -192,8 +193,11 @@ static NSString *TweetCellIdentifier = @"TweetCellIdentifier";
     
     TPKTweetCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:TweetCellIdentifier forIndexPath:indexPath];
     cell.tweet = tweet;
-    cell.tweetCellActionBlock = ^(TPKTweetCellAction action) {
-        // 
+    cell.forwardTweetActionBlock = ^() {
+        SLComposeViewController *composeViewController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+        [composeViewController setInitialText:[NSString stringWithFormat:@"RT %@ %@", [@"@" stringByAppendingString:tweet.sender.screenName], tweet.text]];
+        
+        [self presentViewController:composeViewController animated:YES completion:nil];
     };
     
     return cell;

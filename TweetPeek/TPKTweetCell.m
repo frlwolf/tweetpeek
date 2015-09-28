@@ -25,6 +25,8 @@
 @property (nonatomic, strong) NSMutableArray *actionsContentContainerConstraints;
 @property (nonatomic, strong) NSMutableArray *defaultContentContainerConstraints;
 
+@property (nonatomic, strong) NSArray *imageLeftMarginConstraints;
+
 @end
 
 @implementation TPKTweetCell
@@ -79,6 +81,7 @@
     UIView *contentContainerView = [[UIView alloc] init];
     contentContainerView.backgroundColor = self.backgroundColor;
     contentContainerView.translatesAutoresizingMaskIntoConstraints = NO;
+    contentContainerView.clipsToBounds = YES;
 
     [self.contentView addSubview:contentContainerView];
     
@@ -156,10 +159,39 @@
 {
     sender.selected = !sender.selected;
     
-    int index = (int)[self.actionButtons indexOfObject:sender];
+    TPKTweetCellAction action = (TPKTweetCellAction)[self.actionButtons indexOfObject:sender];
     
-    if (_tweetCellActionBlock)
-        _tweetCellActionBlock((TPKTweetCellAction)index);
+    if (action == TPKTweetCellActionHideImage)
+    {
+        for (NSLayoutConstraint *constraint in self.imageLeftMarginConstraints)
+            constraint.constant = -constraint.constant;
+            
+        [UIView animateWithDuration:0.2 animations:^{
+            self.userImageView.alpha = (CGFloat)!sender.selected;
+            
+            [self.contentContainerView layoutIfNeeded];
+        }];
+    }
+    else if (action == TPKTweetCellActionDarkAppearance)
+    {
+        if (!sender.selected)
+        {
+            self.contentContainerView.backgroundColor = self.backgroundColor;
+            self.statusLabel.textColor = [UIColor colorWithWhite:.2f alpha:1.f];
+        }
+        else
+        {
+            self.contentContainerView.backgroundColor = [UIColor colorWithWhite:.15f alpha:1.f];
+            self.statusLabel.textColor = self.backgroundColor;
+        }
+    }
+    else if (action == TPKTweetCellActionScreenName)
+        self.userNameLabel.text = sender.selected ? [@"@" stringByAppendingString:self.tweet.sender.screenName] : self.tweet.sender.name;
+    else if (_forwardTweetActionBlock)
+    {
+        _forwardTweetActionBlock();
+        sender.selected = NO;
+    }
 }
 
 - (void)didSwipe:(UISwipeGestureRecognizer *)swipe
@@ -235,17 +267,31 @@
         }
     }
     
-    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|-55-[_userImageView(==77)]-33-[_statusLabel]-66-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views];
+    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"[_userImageView(==77)]-33-[_statusLabel]-66-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views];
     [regularConstraints addObjectsFromArray:constraints];
     [self.contentContainerView addConstraints:constraints];
+    
+    NSMutableArray *imageLeftMarginConstraints = [[NSMutableArray alloc] init];
+    
+    constraint = [NSLayoutConstraint constraintWithItem:_userImageView attribute:NSLayoutAttributeLeftMargin relatedBy:NSLayoutRelationEqual toItem:self.contentContainerView attribute:NSLayoutAttributeLeftMargin multiplier:1.f constant:55.f];
+    [regularConstraints addObject:constraint];
+    [imageLeftMarginConstraints addObject:constraint];
+    [self.contentContainerView addConstraint:constraint];
     
     constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-33-[_userNameLabel(==25)]-6-[_statusLabel]-33-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views];
     [regularConstraints addObjectsFromArray:constraints];
     [self.contentContainerView addConstraints:constraints];
     
-    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|-21-[_userImageView(==40)]-15-[_statusLabel]-30-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views];
+    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"[_userImageView(==40)]-15-[_statusLabel]-30-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views];
     [compactConstraints addObjectsFromArray:constraints];
     [self.contentContainerView addConstraints:constraints];
+    
+    constraint = [NSLayoutConstraint constraintWithItem:_userImageView attribute:NSLayoutAttributeLeftMargin relatedBy:NSLayoutRelationEqual toItem:self.contentContainerView attribute:NSLayoutAttributeLeftMargin multiplier:1.f constant:21.f];
+    [compactConstraints addObject:constraint];
+    [imageLeftMarginConstraints addObject:constraint];
+    [self.contentContainerView addConstraint:constraint];
+    
+    self.imageLeftMarginConstraints = [NSArray arrayWithArray:imageLeftMarginConstraints];
     
     constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-15-[_userNameLabel(==18)]-6-[_statusLabel]-15-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views];
     [compactConstraints addObjectsFromArray:constraints];
@@ -325,6 +371,17 @@
 
 #pragma mark - Collection cell
 
+- (void)resetAllFormatting
+{
+    for (NSLayoutConstraint *constraint in self.imageLeftMarginConstraints)
+        constraint.constant = fabs(constraint.constant);
+    
+    self.userImageView.alpha = 1.f;
+    
+    self.contentContainerView.backgroundColor = self.backgroundColor;
+    self.statusLabel.textColor = [UIColor colorWithWhite:.2f alpha:1.f];
+}
+
 - (void)prepareForReuse
 {
     self.userImageView.image = nil;
@@ -334,6 +391,8 @@
     
     for (UIButton *button in self.actionButtons)
         button.selected = NO;
+    
+    [self resetAllFormatting];
     
     [[TPKTwitterService sharedService] cancelDownloadTaskForURL:self.tweet.sender.profileImageURL];
 }
